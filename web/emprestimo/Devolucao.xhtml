@@ -1,0 +1,103 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EmprestarEmprestimoTitulo}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+
+
+            <p:fieldset legend="Dados do Usuário" style="margin-bottom:20px">
+                <h:form id="UsuarioCreateForm">
+                    <h:panelGroup id="display" style="border: none">
+                        <p:panelGrid columns="4" rendered="#{usuarioController.selected != null}" >
+                            <p:outputLabel value="#{bundle.CreateUsuarioLabel_idMatricula}" for="idMatricula" />
+                            <p:inputText id="idMatricula" value="#{usuarioController.selected.idMatricula}" title="#{bundle.CreateUsuarioTitle_idMatricula}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_idMatricula}" size="10"/>
+                            <p:outputLabel value="#{bundle.CreateUsuarioLabel_nome}" for="nome" />
+                            <p:inputText id="nome" value="#{usuarioController.selected.nome}" title="#{bundle.CreateUsuarioTitle_nome}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_nome}" size="60"/>
+                            <p:outputLabel value="#{bundle.CreateUsuarioLabel_cpf}" for="cpf" />
+                            <p:inputText id="cpf" value="#{usuarioController.selected.cpf}" title="#{bundle.CreateUsuarioTitle_cpf}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_cpf}"/>
+                        </p:panelGrid>
+                        <p:commandButton value="Pesquisar Usuário" icon="ui-icon-person" style="float: right"/>
+                    </h:panelGroup>
+                </h:form>
+            </p:fieldset>
+
+            <p:fieldset legend="Dados do Livros" style="margin-bottom:20px">
+                <h:form id="DadosLivro">
+                    <h:panelGroup id="display" style="border: none">
+                        <p:panelGrid columns="4" rendered="#{usuarioController.selected != null}" >
+                            <p:outputLabel value="Código" for="idMatricula" />
+                            <p:inputText id="idMatricula" value="#{usuarioController.selected.idMatricula}" title="#{bundle.CreateUsuarioTitle_idMatricula}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_idMatricula}" size="10"/>
+                            <p:outputLabel value="Título" for="nome" />
+                            <p:inputText id="nome" value="#{usuarioController.selected.nome}" title="#{bundle.CreateUsuarioTitle_nome}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_nome}" size="50"/>
+                            <p:outputLabel value="Autor" for="cpf" />
+                            <p:inputText id="cpf" value="#{usuarioController.selected.cpf}" title="#{bundle.CreateUsuarioTitle_cpf}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_cpf}" size="50"/>
+                            <p:outputLabel value="Data do Empréstimo"  />
+                            <p:calendar id="dataEmprestimo" pattern="MM/dd/yyyy" value="#{usuarioController.selected.dataCadastro}" title="#{bundle.EditUsuarioTitle_dataCadastro}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_dataCadastro}" showOn="button"/>
+                            <p:outputLabel value="Data da Devolução" />
+                            <p:calendar id="dataDevolucao" pattern="MM/dd/yyyy" value="#{usuarioController.selected.dataCadastro}" title="#{bundle.EditUsuarioTitle_dataCadastro}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_dataCadastro}" showOn="button"/>
+                        </p:panelGrid>
+                        <p:commandButton value="Pesquisa Livro" icon="ui-icon-note" style="float: right"/>
+                    </h:panelGroup>
+                </h:form>
+            </p:fieldset>
+
+            <h:panelGrid columns="2" cellpadding="5">
+                <p:panel header="Livros Emprestados">
+                    <p:dataTable id="datalist" value="#{emprestimoController.items}" var="item"
+                                 selectionMode="single" selection="#{emprestimoController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.idEmprestimo}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Código"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idEmprestimo}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Título"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dataEmprestimo}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Autor"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dataDevolucao}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="Devolução"/>
+                            </f:facet>
+                            <h:outputText value="#{item.usuarioId}"/>
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+            </h:panelGrid>
+
+            <h:form id="GravaEmprestimo">
+                <p:commandButton value="#{bundle.Cancel}" style="float: right;" icon="ui-icon-cancel"/>
+                <p:commandButton value="#{bundle.Save}" style="float: right;" icon="ui-icon-disk"/>
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+
+</html>

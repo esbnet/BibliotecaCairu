@@ -1,0 +1,53 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UsuarioFindDlg" widgetVar="UsuarioFindDialog" modal="true" resizable="false" appendTo="@(body)" header="Pesquisa Usuário" width="50%">
+
+            <h:form id="UsuarioFindForm">
+
+                <h:panelGrid columns="2">
+                    <p:inputText id="nomeFind" size="50" placeholder="Informe parte do nome usuário"/>
+                    <p:commandButton icon="ui-icon-search" title="Pesquisa" update=":EmprestimoCreateForm"/>
+                </h:panelGrid>   
+
+                <p:panel header="#{bundle.ListUsuarioTitle}">
+                    <p:dataTable id="datafind" value="#{usuarioController.items}" var="item"
+                                 selectionMode="single" selection="#{usuarioController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.idMatricula}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+
+                        <p:column width="15%">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListUsuarioTitle_idMatricula}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.idMatricula}" />
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListUsuarioTitle_nome}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.nome}"/>
+                        </p:column>
+                        <p:column width="20%">
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListUsuarioTitle_cpf}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.cpf}"/>
+                        </p:column>
+                    </p:dataTable>
+                </p:panel>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

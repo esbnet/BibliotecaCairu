@@ -1,0 +1,33 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition>
+
+        <p:dialog id="UsuarioCreateDlg" widgetVar="UsuarioCreateDialog" modal="true" resizable="false" appendTo="@(body)" header="#{bundle.CreateUsuarioTitle}" >
+            <h:form id="UsuarioCreateForm">
+                <h:panelGroup id="display">
+                    <p:panelGrid columns="2" rendered="#{usuarioController.selected != null}">
+                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_idMatricula}" for="idMatricula" />
+                        <p:inputText id="idMatricula" value="#{usuarioController.selected.idMatricula}" title="#{bundle.CreateUsuarioTitle_idMatricula}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_idMatricula}" size="10"/>
+                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_nome}" for="nome" />
+                        <p:inputText id="nome" value="#{usuarioController.selected.nome}" title="#{bundle.CreateUsuarioTitle_nome}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_nome}" size="70"/>
+                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_rg}" for="rg" />
+                        <p:inputText id="rg" value="#{usuarioController.selected.rg}" title="#{bundle.CreateUsuarioTitle_rg}"  size="15"/>
+                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_cpf}" for="cpf" />
+                        <p:inputText id="cpf" value="#{usuarioController.selected.cpf}" title="#{bundle.CreateUsuarioTitle_cpf}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_cpf}" size="15"/>
+                        <p:outputLabel value="#{bundle.CreateUsuarioLabel_dataCadastro}" for="dataCadastro" />
+                        <p:calendar id="dataCadastro" pattern="MM/dd/yyyy" value="#{usuarioController.selected.dataCadastro}" title="#{bundle.EditUsuarioTitle_dataCadastro}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_dataCadastro}" showOn="button"/>
+                    </p:panelGrid>
+                    <p:commandButton actionListener="#{usuarioController.create}" value="#{bundle.Save}" update="display,:UsuarioListForm:datalist,:growl" oncomplete="handleSubmit(args,'UsuarioCreateDialog');"/>
+                    <p:commandButton value="#{bundle.Cancel}" onclick="UsuarioCreateDialog.hide()"/>
+                </h:panelGroup>
+            </h:form>
+        </p:dialog>
+
+    </ui:composition>
+</html>

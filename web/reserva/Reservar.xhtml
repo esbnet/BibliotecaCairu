@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:ui="http://xmlns.jcp.org/jsf/facelets"
+      xmlns:h="http://xmlns.jcp.org/jsf/html"
+      xmlns:f="http://xmlns.jcp.org/jsf/core"
+      xmlns:p="http://primefaces.org/ui">
+
+    <ui:composition template="/template.xhtml">
+
+        <ui:define name="title">
+            <h:outputText value="#{bundle.EmprestarEmprestimoTitulo}"></h:outputText>
+        </ui:define>
+        <ui:define name="body">
+
+
+            <p:fieldset legend="Dados do Usuário" style="margin-bottom:20px">
+                <h:form id="ReservaUsuarioForm">
+                    <h:panelGroup id="display" style="border: none">
+                        <p:panelGrid columns="4" rendered="true" >
+                            <p:outputLabel value="#{bundle.CreateUsuarioLabel_idMatricula}" for="idMatricula" />
+                            <p:inputText id="idMatricula" value="#{usuarioController.selected.idMatricula}" title="#{bundle.CreateUsuarioTitle_idMatricula}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_idMatricula}" size="10"/>
+                            <p:outputLabel value="#{bundle.CreateUsuarioLabel_nome}" for="nome" />
+                            <p:inputText id="nome" value="#{usuarioController.selected.nome}" title="#{bundle.CreateUsuarioTitle_nome}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_nome}" size="60"/>
+                            <p:outputLabel value="#{bundle.CreateUsuarioLabel_cpf}" for="cpf" />
+                            <p:inputText id="cpf" value="#{usuarioController.selected.cpf}" title="#{bundle.CreateUsuarioTitle_cpf}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_cpf}"/>
+                        </p:panelGrid>
+                        <p:commandButton value="Pesquisar" icon="ui-icon-search" style="float: right"/>
+                        <p:commandButton value="Confirmar" icon="ui-icon-check" />
+                    </h:panelGroup>
+                </h:form>
+            </p:fieldset>
+
+            <p:fieldset legend="Dados do Livros" style="margin-bottom:20px">
+                <h:form id="DadosLivro">
+                    <h:panelGroup id="display" style="border: none">
+                        <p:panelGrid columns="4" rendered="true" >
+                            <p:outputLabel value="Código" for="idMatricula" />
+                            <p:inputText id="idMatricula" value="#{usuarioController.selected.idMatricula}" title="#{bundle.CreateUsuarioTitle_idMatricula}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_idMatricula}" size="10"/>
+                            <p:outputLabel value="Data da Reserva" />
+                            <p:calendar id="dataDevolucao" pattern="MM/dd/yyyy" value="#{usuarioController.selected.dataCadastro}" title="#{bundle.EditUsuarioTitle_dataCadastro}" required="true" requiredMessage="#{bundle.EditUsuarioRequiredMessage_dataCadastro}" showOn="button"/>
+                            <p:outputLabel value="Título" for="nome" />
+                            <p:inputText id="nome" value="#{usuarioController.selected.nome}" title="#{bundle.CreateUsuarioTitle_nome}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_nome}" size="50"/>
+                            <p:outputLabel value="Autor" for="cpf" />
+                            <p:inputText id="cpf" value="#{usuarioController.selected.cpf}" title="#{bundle.CreateUsuarioTitle_cpf}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_cpf}" size="50"/>
+                            <p:outputLabel value="Editora"  />
+                            <p:inputText id="editora" value="" title="#{bundle.CreateUsuarioTitle_cpf}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_cpf}" size="50"/>
+                            <p:outputLabel value="Exemplares Disponíveis"/>
+                            <p:inputText id="exemplaresDisponiveis" value="" title="#{bundle.CreateUsuarioTitle_cpf}" required="true" requiredMessage="#{bundle.CreateUsuarioRequiredMessage_cpf}" size="6"/>
+                        </p:panelGrid>
+                        <p:commandButton value="Pesquisa" icon="ui-icon-search" style="float: right"/>
+                    </h:panelGroup>
+                </h:form>
+            </p:fieldset>
+
+            <h:form id="GravaReserva">
+                <p:commandButton value="#{bundle.Cancel}" style="float: right;" icon="ui-icon-cancel"/>
+                <p:commandButton value="#{bundle.Save}" style="float: right;" icon="ui-icon-disk"/>
+            </h:form>
+
+        </ui:define>
+    </ui:composition>
+
+</html>
