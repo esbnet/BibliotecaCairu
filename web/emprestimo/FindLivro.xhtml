@@ -12,95 +12,71 @@
 
             <h:form id="LivroFindForm">
 
-                <h:panelGrid>
-                    <p:inputText id="nomeLivroFind" size="50" placeholder="Informe parte do nome do livro"/>
-                    <p:commandButton icon="ui-icon-search" title="Pesquisar livro"/>
-                </h:panelGrid>   
+                <p:inputText id="nomeLivroFind" size="50" placeholder="Informe parte do nome do livro"/>
+                <p:commandButton icon="ui-icon-search" title="Pesquisar livro"/>
 
-                    <p:panel header="#{bundle.ListLivroTitle}">
-                        <p:dataTable id="datalist" value="#{livroController.items}" var="item"
-                            selectionMode="single" selection="#{livroController.selected}"
-                            paginator="true"
-                            rowKey="#{item.idLivro}"
-                            rows="10"
-                            rowsPerPageTemplate="10,20,30,40,50"
-                            >
-                            <p:ajax event="rowSelect"   update="adicionarButton"/>
-                            <p:ajax event="rowUnselect" update="adicionarButton"/>
+                <p:panel header=":: Acervo Disponível ::">
+                    <p:dataTable id="datalist" value="#{livroController.items}" var="item"
+                                 selectionMode="single" selection="#{livroController.selected}"
+                                 paginator="true"
+                                 rowKey="#{item.idLivro}"
+                                 rows="10"
+                                 rowsPerPageTemplate="10,20,30,40,50"
+                                 >
+                        <p:ajax event="rowSelect"   update="adicionarButton"/>
+                        <p:ajax event="rowUnselect" update="adicionarButton"/>
 
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListLivroTitle_idLivro}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.idLivro}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListLivroTitle_isbn}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.isbn}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListLivroTitle_titulo}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.titulo}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListLivroTitle_edicao}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.edicao}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListLivroTitle_volume}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.volume}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListLivroTitle_paginas}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.paginas}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListLivroTitle_localizacao}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.localizacao}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListLivroTitle_tipoAcervo}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.tipoAcervo}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListLivroTitle_dataPublicacao}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.dataPublicacao}">
-                                    <f:convertDateTime pattern="MM/dd/yyyy" />
-                                </h:outputText>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListLivroTitle_autorId}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.autorId}"/>
-                            </p:column>
-                            <p:column>
-                                <f:facet name="header">
-                                    <h:outputText value="#{bundle.ListLivroTitle_editoraId}"/>
-                                </f:facet>
-                                <h:outputText value="#{item.editoraId}"/>
-                            </p:column>
-                            <f:facet name="footer">
-                                <p:commandButton id="adicionarButton" icon="ui-icon-plus"   value="Aicionar" actionListener="#{livroController.prepareCreate}" update=":LivroFindForm" oncomplete="PF('LivroFindDialog').show()"/>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLivroTitle_titulo}"/>
                             </f:facet>
-                        </p:dataTable>
-                    </p:panel>
+                            <h:outputText value="#{item.titulo}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLivroTitle_autorId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.autorId}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLivroTitle_editoraId}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.editoraId}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLivroTitle_localizacao}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.localizacao}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLivroTitle_isbn}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.isbn}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLivroTitle_edicao}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.edicao}"/>
+                        </p:column>
+                        <p:column>
+                            <f:facet name="header">
+                                <h:outputText value="#{bundle.ListLivroTitle_dataPublicacao}"/>
+                            </f:facet>
+                            <h:outputText value="#{item.dataPublicacao}">
+                                <f:convertDateTime pattern="MM/dd/yyyy" />
+                            </h:outputText>
+                        </p:column>
+                        <f:facet name="footer">
+                            <p:commandButton id="adicionarButton" icon="ui-icon-plus"   value="Aicionar" actionListener="#{livroController.prepareCreate}" update=":LivroFindForm" oncomplete="PF('LivroFindDialog').show()"/>
+                            <p:commandButton value="#{bundle.Cancel}" onclick="LivroFindDialog.hide()" icon="ui-icon-cancel"/>
+
+                        </f:facet>
+                    </p:dataTable>
+                </p:panel>
             </h:form>
         </p:dialog>
 

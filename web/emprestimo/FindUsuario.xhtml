@@ -14,7 +14,7 @@
 
                 <h:panelGrid columns="2">
                     <p:inputText id="nomeFind" size="50" placeholder="Informe parte do nome usuário"/>
-                    <p:commandButton icon="ui-icon-search" title="Pesquisa" update=":EmprestimoCreateForm"/>
+                    <p:commandButton icon="ui-icon-search" title="Pesquisa"   />
                 </h:panelGrid>   
 
                 <p:panel header="#{bundle.ListUsuarioTitle}">
@@ -44,6 +44,12 @@
                             </f:facet>
                             <h:outputText value="#{item.cpf}"/>
                         </p:column>
+
+                        <f:facet name="footer">
+                            <p:commandButton id="adicionarButton" icon="ui-icon-plus"   value="Aicionar" update=":EmprestimoCreateForm" onclick="UsuarioFindDialog.hide()"/>
+                            <p:commandButton value="#{bundle.Cancel}" onclick="UsuarioFindDialog.hide()" icon="ui-icon-cancel"/>
+                        </f:facet>
+
                     </p:dataTable>
                 </p:panel>
             </h:form>
